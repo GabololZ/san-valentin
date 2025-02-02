@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+        }
+        .panda {
+            width: 150px;
+            margin-top: 20px;
+        }
+        .bubbles {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .bubble {
+            width: 50px;
+            height: 50px;
+            background-color: #ff99cc;
+            border-radius: 50%;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .bubble:hover {
+            transform: scale(1.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .question {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .buttons button {
+            font-size: 20px;
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+        }
+        .yes {
+            background-color: #ff4d94;
+            color: white;
+        }
+        .no {
+            background-color: #b3b3b3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Tu novio quiere decirte algo! 🥰</h1>
+    <img src="panda.png" width="100%" alt="Panda" class="panda">
+    <p>Te amo bb y tengo algo que decirte...</p>
+    <div class="bubbles" id="bubbleContainer"></div>
+    <div id="questionContainer" class="hidden">
+        <p class="question">¿Quieres ser mi San Valentín? 💖</p>
+        <div class="buttons">
+            <button class="yes" onclick="showResponse(true)">Sí</button>
+            <button class="no" onclick="showResponse(false)">No</button>
+        </div>
+    </div>
+    <p id="responseMessage" class="hidden"></p>
+    <script>
+        function createBubbles() {
+            const container = document.getElementById("bubbleContainer");
+            for (let i = 0; i < 6; i++) {
+                let bubble = document.createElement("div");
+                bubble.classList.add("bubble");
+                bubble.innerText = "💖";
+                bubble.onclick = function() {
+                    bubble.remove();
+                    checkBubbles();
+                };
+                container.appendChild(bubble);
+            }
+        }
+        function checkBubbles() {
+            if (document.querySelectorAll(".bubble").length === 0) {
+                document.getElementById("questionContainer").classList.remove("hidden");
+            }
+        }
+        function showResponse(answer) {
+            let message = document.getElementById("responseMessage");
+            if (answer) {
+                message.innerHTML = "Ya sabía que ibas a decir que sí! 😍💖";
+                document.querySelector(".panda").src = "image.png"; // Panda sonriendo
+            } else {
+                message.innerHTML = "Oh no... 💔";
+            }
+            message.classList.remove("hidden");
+        }
+        createBubbles();
+    </script>
+</body>
+</html>
